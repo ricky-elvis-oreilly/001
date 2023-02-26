@@ -3,8 +3,9 @@
 pragma solidity ^0.8.7;
 
 import "./SettingsClient.sol";
+import "./LayersClient.sol";
 
-contract Wallet is SettingsClient {
+contract Wallet is SettingsClient, LayersClient {
   event HandleLayerStarted();
   event HandleLayerSuccess();
   event HandleLayerFailure();
@@ -23,41 +24,18 @@ contract Wallet is SettingsClient {
   }
 
 
-  event Test(
-    string label,
-    uint256 ref,
-    uint256 amountMin,
-    uint256 amountMax
-  );
-
   function test() public {
     Settings.SettingToMakeATransfer storage setting0 = createSettingToMakeATransfer();
 
     setAmounts(true, false, setting0.indexref, 0, 100);
 
-    emit Test(
-      setting0.label,
-      setting0.indexref,
-      setting0.amountMin,
-      setting0.amountMax
-    );
+    Layers.Layer memory layerSet0Lay0 = createLayer();
 
+    addLayer();
+
+    /*
     Settings.SettingToMakeAWithdrawal storage setting1 = createSettingToMakeAWithdrawal();
-
     setAmounts(false, true, setting1.indexref, 333, 444);
-
-    emit Test(
-      setting1.label,
-      setting1.indexref,
-      setting1.amountMin,
-      setting1.amountMax
-    );
-
-    emit Test(
-      setting0.label,
-      setting0.indexref,
-      setting0.amountMin,
-      setting0.amountMax
-    );
+    */
   }
 }
