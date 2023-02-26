@@ -27,6 +27,11 @@ contract Wallet is SettingsClient {
   }
 
 
+  event Test(string label);
   function test() public {
+    SettingToMakeATransfer memory settingTransfer = createSettingToMakeATransfer();
+    SettingToMakeAWithdrawal memory settingWithdrawal = createSettingToMakeAWithdrawal();
+    emit Test(settingTransfer.label);
+    emit Test(settingWithdrawal.label);
   }
 }

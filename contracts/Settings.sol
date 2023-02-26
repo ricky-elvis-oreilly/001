@@ -4,6 +4,8 @@ pragma solidity ^0.8.7;
 
 library Settings {
   struct SettingToMakeATransfer {
+    string label;
+
     uint256 amountMin;
     uint256 amountMax;
   }
@@ -19,6 +21,8 @@ library Settings {
 
 
   struct SettingToMakeAWithdrawal {
+    string label;
+
     uint256 amountMin;
     uint256 amountMax;
   }
