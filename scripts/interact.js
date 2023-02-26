@@ -34,9 +34,10 @@ main().catch(error => {
   process.exitCode = 1
 })
 
-walletContract.on("Test", (label, amountMin, amountMax) => {
+walletContract.on("Test", (label, ref, amountMin, amountMax) => {
   console.log(">>> Test")
   console.log("label:", label)
+  console.log("ref:", ref)
   console.log("amountMin:", amountMin)
   console.log("amountMax:", amountMax)
 })

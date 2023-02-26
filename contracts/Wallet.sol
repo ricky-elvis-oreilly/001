@@ -5,14 +5,6 @@ pragma solidity ^0.8.7;
 import "./SettingsClient.sol";
 
 contract Wallet is SettingsClient {
-  using Settings for Settings.SettingToMakeATransfer;
-  using Settings for Settings.SettingToMakeAWithdrawal;
-
-
-  uint256 numSettingsToMakeATransfer;
-  mapping (uint256 => Settings.SettingToMakeATransfer) SettingToMakeATransfer;
-
-
   event HandleLayerStarted();
   event HandleLayerSuccess();
   event HandleLayerFailure();
@@ -31,15 +23,41 @@ contract Wallet is SettingsClient {
   }
 
 
-  event Test(string label, uint256 amountMin, uint256 amountMax);
+  event Test(
+    string label,
+    uint256 ref,
+    uint256 amountMin,
+    uint256 amountMax
+  );
 
   function test() public {
-    Settings.SettingToMakeATransfer memory settingTransfer = createSettingToMakeATransfer();
-    settingTransfer.setAmounts(0, 100);
-    emit Test(settingTransfer.label, settingTransfer.amountMin, settingTransfer.amountMax);
+    Settings.SettingToMakeATransfer storage setting0 = createSettingToMakeATransfer();
 
-    Settings.SettingToMakeAWithdrawal memory settingWithdrawal = createSettingToMakeAWithdrawal();
-    settingWithdrawal.setAmounts(333, 444);
-    emit Test(settingWithdrawal.label, settingWithdrawal.amountMin, settingWithdrawal.amountMax);
+    setAmounts(true, false, setting0.indexref, 0, 100);
+
+    emit Test(
+      setting0.label,
+      setting0.indexref,
+      setting0.amountMin,
+      setting0.amountMax
+    );
+
+    Settings.SettingToMakeAWithdrawal storage setting1 = createSettingToMakeAWithdrawal();
+
+    setAmounts(false, true, setting1.indexref, 333, 444);
+
+    emit Test(
+      setting1.label,
+      setting1.indexref,
+      setting1.amountMin,
+      setting1.amountMax
+    );
+
+    emit Test(
+      setting0.label,
+      setting0.indexref,
+      setting0.amountMin,
+      setting0.amountMax
+    );
   }
 }

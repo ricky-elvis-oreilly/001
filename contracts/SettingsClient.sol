@@ -5,19 +5,51 @@ pragma solidity ^0.8.7;
 import "./Settings.sol";
 
 abstract contract SettingsClient {
-  function createSettingToMakeATransfer() internal pure returns (Settings.SettingToMakeATransfer memory) {
-    Settings.SettingToMakeATransfer memory settingToMakeATransfer;
+  uint256 numSettingsToMakeATransfer;
+  mapping (uint256 => Settings.SettingToMakeATransfer) SettingsToMakeATransfer;
 
-    settingToMakeATransfer.label = "TRANSFER";
+  uint256 numSettingsToMakeAWithdrawal;
+  mapping (uint256 => Settings.SettingToMakeAWithdrawal) SettingsToMakeAWithdrawal;
 
-    return settingToMakeATransfer;
+
+  function createSettingToMakeATransfer() internal returns (Settings.SettingToMakeATransfer storage) {
+    Settings.SettingToMakeATransfer storage created = SettingsToMakeATransfer[numSettingsToMakeATransfer];
+
+    created.label = "TRANSFER";
+    created.indexref = numSettingsToMakeATransfer;
+
+    numSettingsToMakeATransfer++;
+
+    return created;
   }
 
-  function createSettingToMakeAWithdrawal() internal pure returns (Settings.SettingToMakeAWithdrawal memory) {
-    Settings.SettingToMakeAWithdrawal memory settingToMakeAWithdrawal;
+  function createSettingToMakeAWithdrawal() internal returns (Settings.SettingToMakeAWithdrawal storage) {
+    Settings.SettingToMakeAWithdrawal storage created = SettingsToMakeAWithdrawal[numSettingsToMakeAWithdrawal];
 
-    settingToMakeAWithdrawal.label = "WITHDRAWAL";
+    created.label = "WITHDRAWAL";
+    created.indexref = numSettingsToMakeAWithdrawal;
 
-    return settingToMakeAWithdrawal;
+    numSettingsToMakeAWithdrawal++;
+
+    return created;
+  }
+
+
+  function setAmounts(
+    bool _isSettingToMakeATransfer,
+    bool _isSettingToMakeAWithdrawal,
+    uint256 _indexref,
+    uint256 _amountMin,
+    uint256 _amountMax
+  ) internal {
+    if (_isSettingToMakeATransfer) {
+      SettingsToMakeATransfer[_indexref].amountMin = _amountMin;
+      SettingsToMakeATransfer[_indexref].amountMax = _amountMax;
+    }
+
+    if (_isSettingToMakeAWithdrawal) {
+      SettingsToMakeAWithdrawal[_indexref].amountMin = _amountMin;
+      SettingsToMakeAWithdrawal[_indexref].amountMax = _amountMax;
+    }
   }
 }
