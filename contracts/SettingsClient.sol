@@ -15,7 +15,6 @@ abstract contract SettingsClient {
   function createSettingToMakeATransfer() internal returns (Settings.SettingToMakeATransfer storage) {
     Settings.SettingToMakeATransfer storage created = SettingsToMakeATransfer[numSettingsToMakeATransfer];
 
-    created.label = "TRANSFER";
     created.indexref = numSettingsToMakeATransfer;
 
     numSettingsToMakeATransfer++;
@@ -26,7 +25,6 @@ abstract contract SettingsClient {
   function createSettingToMakeAWithdrawal() internal returns (Settings.SettingToMakeAWithdrawal storage) {
     Settings.SettingToMakeAWithdrawal storage created = SettingsToMakeAWithdrawal[numSettingsToMakeAWithdrawal];
 
-    created.label = "WITHDRAWAL";
     created.indexref = numSettingsToMakeAWithdrawal;
 
     numSettingsToMakeAWithdrawal++;
@@ -57,8 +55,6 @@ abstract contract SettingsClient {
     bool _isSettingToMakeATransfer,
     bool _isSettingToMakeAWithdrawal,
     uint256 _indexref,
-    /* is seq sep,
-       set flag to active or whatever.. or for setting not layer*/
     Layers.Layer memory layer
   ) internal {
     if (_isSettingToMakeATransfer) {

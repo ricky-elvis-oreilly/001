@@ -25,6 +25,9 @@ contract Wallet is SettingsClient, LayersClient {
 
 
   function test() public {
+    // call this somewhere on deploy
+    initializeLayerCallbacks();
+
     Settings.SettingToMakeATransfer storage setting0 = createSettingToMakeATransfer();
 
     setAmounts(
@@ -36,6 +39,7 @@ contract Wallet is SettingsClient, LayersClient {
     );
 
     Layers.Layer memory layerSet0Lay0 = createLayer();
+    // callbacks same ...
 
     addLayer(
       true,
