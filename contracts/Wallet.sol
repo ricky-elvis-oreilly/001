@@ -27,15 +27,21 @@ contract Wallet is SettingsClient, LayersClient {
   function test() public {
     Settings.SettingToMakeATransfer storage setting0 = createSettingToMakeATransfer();
 
-    setAmounts(true, false, setting0.indexref, 0, 100);
+    setAmounts(
+      true,
+      false,
+      setting0.indexref,
+      0,
+      100
+    );
 
     Layers.Layer memory layerSet0Lay0 = createLayer();
 
-    addLayer();
-
-    /*
-    Settings.SettingToMakeAWithdrawal storage setting1 = createSettingToMakeAWithdrawal();
-    setAmounts(false, true, setting1.indexref, 333, 444);
-    */
+    addLayer(
+      true,
+      false,
+      setting0.indexref,
+      layerSet0Lay0
+    );
   }
 }

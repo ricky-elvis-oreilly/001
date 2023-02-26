@@ -13,7 +13,7 @@ library Settings {
     uint256 amountMax;
 
     uint256 numLayers;
-    mapping (uint256 => Layers.Layer) Layers;
+    mapping (uint256 => Layers.Layer) layers;
   }
 
   struct SettingToMakeAWithdrawal {
@@ -22,5 +22,8 @@ library Settings {
 
     uint256 amountMin;
     uint256 amountMax;
+
+    uint256 numLayers;
+    mapping (uint256 => Layers.Layer) layers;
   }
 }

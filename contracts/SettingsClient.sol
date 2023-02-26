@@ -52,4 +52,25 @@ abstract contract SettingsClient {
       SettingsToMakeAWithdrawal[_indexref].amountMax = _amountMax;
     }
   }
+
+  function addLayer(
+    bool _isSettingToMakeATransfer,
+    bool _isSettingToMakeAWithdrawal,
+    uint256 _indexref,
+    /* is seq sep,
+       set flag to active or whatever.. or for setting not layer*/
+    Layers.Layer memory layer
+  ) internal {
+    if (_isSettingToMakeATransfer) {
+      Settings.SettingToMakeATransfer storage setting = SettingsToMakeATransfer[_indexref];
+      setting.layers[setting.numLayers] = layer;
+      setting.numLayers++;
+    }
+
+    if (_isSettingToMakeAWithdrawal) {
+      Settings.SettingToMakeAWithdrawal storage setting = SettingsToMakeAWithdrawal[_indexref];
+      setting.layers[setting.numLayers] = layer;
+      setting.numLayers++;
+    }
+  }
 }
