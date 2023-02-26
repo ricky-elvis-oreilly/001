@@ -2,6 +2,8 @@
 
 pragma solidity ^0.8.7;
 
+import "./SettingsClient.sol";
+
 contract Wallet is SettingsClient {
   uint256 numSettingsToMakeATransfer;
   mapping (uint256 => Settings.SettingToMakeATransfer) SettingToMakeATransfer;
