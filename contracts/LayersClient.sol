@@ -5,10 +5,10 @@ pragma solidity ^0.8.7;
 import "./Layers.sol";
 
 abstract contract LayersClient {
-  address private constant CONTRACT_CALLBACK_ADDRESS;
-  bytes4 private constant STARTED_CALLBACK_FUNCTION_SIGNATURE;
-  bytes4 private constant SUCCESS_CALLBACK_FUNCTION_SIGNATURE;
-  bytes4 private constant FAILURE_CALLBACK_FUNCTION_SIGNATURE;
+  address private contractCallbackAddress;
+  bytes4 private startedCallbackFunctionSignature;
+  bytes4 private successCallbackFunctionSignature;
+  bytes4 private failureCallbackFunctionSignature;
 
 
   function initializeLayerCallbacks(
@@ -16,11 +16,11 @@ abstract contract LayersClient {
     bytes4 _startedCallbackFunctionSignature,
     bytes4 _successCallbackFunctionSignature,
     bytes4 _failureCallbackFunctionSignature
-  ) internal pure {
-    CONTRACT_CALLBACK_ADDRESS = _contractCallbackAddress;
-    STARTED_CALLBACK_FUNCTION_SIGNATURE = _startedCallbackFunctionSignature;
-    SUCCESS_CALLBACK_FUNCTION_SIGNATURE = _successCallbackFunctionSignature;
-    FAILURE_CALLBACK_FUNCTION_SIGNATURE = _failureCallbackFunctionSignature;
+  ) internal {
+    contractCallbackAddress = _contractCallbackAddress;
+    startedCallbackFunctionSignature = _startedCallbackFunctionSignature;
+    successCallbackFunctionSignature = _successCallbackFunctionSignature;
+    failureCallbackFunctionSignature = _failureCallbackFunctionSignature;
   }
 
 

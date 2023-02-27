@@ -7,3 +7,6 @@ package-lock.json
 
 # ignore node modules installed with npm
 node_modules
+
+artifacts
+cache
