@@ -25,30 +25,27 @@ contract Wallet is SettingsClient, LayersClient {
 
 
   function test() public {
+    /**************************************************************************/
     initializeLayerCallbacks(
       address(this),
       this.handleLayerStarted.selector,
       this.handleLayerSuccess.selector,
       this.handleLayerFailure.selector
     );
+    /**************************************************************************/
 
     Settings.SettingToMakeATransfer storage setting0 = createSettingToMakeATransfer();
 
-    setAmounts(
-      true,
-      false,
-      setting0.indexref,
-      0,
-      100
-    );
-
     Layers.Layer memory layerSet0Lay0 = createLayer();
+    Layers.Layer memory layerSet0Lay1 = createLayer();
+    Layers.Layer memory layerSet0Lay2 = createLayer();
 
-    addLayer(
-      true,
-      false,
-      setting0.indexref,
-      layerSet0Lay0
-    );
+    setAmounts(true, false, setting0.indexref, 0, 100);
+
+    addLayer(true, false, setting0.indexref, layerSet0Lay0);
+    addLayer(true, false, setting0.indexref, layerSet0Lay1);
+    addLayer(true, false, setting0.indexref, layerSet0Lay2);
+
+    execLayers(true, false, setting0.indexref);
   }
 }

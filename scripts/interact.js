@@ -33,3 +33,7 @@ main().catch(error => {
   console.log(error)
   process.exitCode = 1
 })
+
+walletContract.on("HandleLayerStarted", () => {
+  console.log("..................... layer started");
+})
