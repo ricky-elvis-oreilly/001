@@ -3,8 +3,12 @@
 pragma solidity ^0.8.7;
 
 import "./Settings.sol";
+import "./Layers.sol";
 
 abstract contract SettingsClient {
+  using Layers for Layers.Layer;
+
+
   uint256 numSettingsToMakeATransfer;
   mapping (uint256 => Settings.SettingToMakeATransfer) SettingsToMakeATransfer;
 

@@ -24,7 +24,7 @@ abstract contract LayersClient {
   }
 
 
-  function createLayer() internal pure returns (Layers.Layer memory) {
+  function createLayer() internal returns (Layers.Layer memory) {
     // require ...
 
     Layers.Layer memory created;
